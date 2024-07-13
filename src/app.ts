@@ -7,7 +7,10 @@ const app: Application = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://4-7kgjwt6ra-faysalahmed000012s-projects.vercel.app/"],
+    origin: [
+      "https://4-7kgjwt6ra-faysalahmed000012s-projects.vercel.app/",
+      "*",
+    ],
     credentials: true,
   })
 );
