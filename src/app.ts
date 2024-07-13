@@ -5,7 +5,7 @@ import router from "./app/product.routes";
 const app: Application = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "*", credentials: true }));
 
 app.use("/products", router);
 
