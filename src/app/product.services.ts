@@ -2,11 +2,14 @@ import QueryBuilder from "../builder/queryBuilder";
 import { Product } from "./product.model";
 
 const getAllProducts = async (query: any) => {
-  const productQuery = new QueryBuilder(Product.find(), query)
+  const productQuery = new QueryBuilder(
+    Product.find({ isDeleted: false }),
+    query
+  )
     .search(["name"])
     .filter()
-    .paginate();
-
+    .paginate()
+    .sort();
   const meta = await productQuery.countTotal();
 
   const products = await productQuery.modelQuery;
@@ -14,7 +17,7 @@ const getAllProducts = async (query: any) => {
 };
 
 const getProductById = async (id: string) => {
-  const product = await Product.findOne({ _id: id });
+  const product = await Product.findOne({ _id: id, isDeleted: false });
   return product;
 };
 

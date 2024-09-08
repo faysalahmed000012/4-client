@@ -37,13 +37,13 @@ class QueryBuilder<T> {
     return this;
   }
 
-  //   sort() {
-  //     const sort =
-  //       (this?.query?.sort as string)?.split(",")?.join(" ") || "-createdAt";
-  //     this.modelQuery = this.modelQuery.sort(sort as string);
+  sort() {
+    const sort =
+      (this?.query?.sort as string)?.split(",")?.join(" ") || "-createdAt";
+    this.modelQuery = this.modelQuery.sort(sort as string);
 
-  //     return this;
-  //   }
+    return this;
+  }
 
   paginate() {
     const page = Number(this?.query?.page) || 1;
@@ -55,13 +55,6 @@ class QueryBuilder<T> {
     return this;
   }
 
-  //   fields() {
-  //     const fields =
-  //       (this?.query?.fields as string)?.split(",")?.join(" ") || "-__v";
-
-  //     this.modelQuery = this.modelQuery.select(fields);
-  //     return this;
-  //   }
   async countTotal() {
     const totalQueries = this.modelQuery.getFilter();
     const total = await this.modelQuery.model.countDocuments(totalQueries);

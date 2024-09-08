@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 
-const ProductSchema = new Schema({
+const CartItemSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -22,9 +22,10 @@ const ProductSchema = new Schema({
     type: [String],
     required: true,
   },
-  rating: {
+  ratings: {
     type: Number,
-    required: true,
+    required: false,
+    default: 5.0,
   },
   quantity: {
     type: Number,
@@ -34,6 +35,30 @@ const ProductSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  orderQuantity: {
+    type: Number,
+    required: true,
+  },
 });
 
-export const Product = model("Product", ProductSchema);
+const UserSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+});
+
+const OrderSchema = new Schema({
+  items: [CartItemSchema],
+  user: UserSchema,
+});
+
+export const Order = model("Order", OrderSchema);
