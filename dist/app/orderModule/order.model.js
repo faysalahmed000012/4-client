@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Product = void 0;
+exports.Order = void 0;
 const mongoose_1 = require("mongoose");
-const ProductSchema = new mongoose_1.Schema({
+const CartItemSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: true,
@@ -24,9 +24,10 @@ const ProductSchema = new mongoose_1.Schema({
         type: [String],
         required: true,
     },
-    rating: {
+    ratings: {
         type: Number,
-        required: true,
+        required: false,
+        default: 5.0,
     },
     quantity: {
         type: Number,
@@ -36,5 +37,27 @@ const ProductSchema = new mongoose_1.Schema({
         type: Boolean,
         default: false,
     },
+    orderQuantity: {
+        type: Number,
+        required: true,
+    },
 });
-exports.Product = (0, mongoose_1.model)("Product", ProductSchema);
+const UserSchema = new mongoose_1.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+    },
+    address: {
+        type: String,
+        required: true,
+    },
+});
+const OrderSchema = new mongoose_1.Schema({
+    items: [CartItemSchema],
+    user: UserSchema,
+});
+exports.Order = (0, mongoose_1.model)("Order", OrderSchema);

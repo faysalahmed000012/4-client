@@ -16,16 +16,17 @@ exports.ProductServices = void 0;
 const queryBuilder_1 = __importDefault(require("../builder/queryBuilder"));
 const product_model_1 = require("./product.model");
 const getAllProducts = (query) => __awaiter(void 0, void 0, void 0, function* () {
-    const productQuery = new queryBuilder_1.default(product_model_1.Product.find(), query)
+    const productQuery = new queryBuilder_1.default(product_model_1.Product.find({ isDeleted: false }), query)
         .search(["name"])
         .filter()
-        .paginate();
+        .paginate()
+        .sort();
     const meta = yield productQuery.countTotal();
     const products = yield productQuery.modelQuery;
     return { products, meta };
 });
 const getProductById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const product = yield product_model_1.Product.findOne({ _id: id });
+    const product = yield product_model_1.Product.findOne({ _id: id, isDeleted: false });
     return product;
 });
 const addProduct = (payload) => __awaiter(void 0, void 0, void 0, function* () {

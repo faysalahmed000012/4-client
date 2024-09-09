@@ -33,12 +33,12 @@ class QueryBuilder {
         this.modelQuery = this.modelQuery.find(queryObj);
         return this;
     }
-    //   sort() {
-    //     const sort =
-    //       (this?.query?.sort as string)?.split(",")?.join(" ") || "-createdAt";
-    //     this.modelQuery = this.modelQuery.sort(sort as string);
-    //     return this;
-    //   }
+    sort() {
+        var _a, _b, _c;
+        const sort = ((_c = (_b = (_a = this === null || this === void 0 ? void 0 : this.query) === null || _a === void 0 ? void 0 : _a.sort) === null || _b === void 0 ? void 0 : _b.split(",")) === null || _c === void 0 ? void 0 : _c.join(" ")) || "-createdAt";
+        this.modelQuery = this.modelQuery.sort(sort);
+        return this;
+    }
     paginate() {
         var _a, _b;
         const page = Number((_a = this === null || this === void 0 ? void 0 : this.query) === null || _a === void 0 ? void 0 : _a.page) || 1;
@@ -47,12 +47,6 @@ class QueryBuilder {
         this.modelQuery = this.modelQuery.skip(skip).limit(limit);
         return this;
     }
-    //   fields() {
-    //     const fields =
-    //       (this?.query?.fields as string)?.split(",")?.join(" ") || "-__v";
-    //     this.modelQuery = this.modelQuery.select(fields);
-    //     return this;
-    //   }
     countTotal() {
         return __awaiter(this, void 0, void 0, function* () {
             var _a, _b;
