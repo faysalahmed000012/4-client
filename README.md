@@ -35,11 +35,20 @@ Please follow the below instructions to run different branches of this repositor
    cd 4-client
    ```
 4. Run these commands (Make sure typescript is installed in your computer)
+
    ```sh
    npm install
    tsc
    ```
-5. Now Run the project
+
+5. Create a .env file and do this
+
+```sh
+PORT=5000
+MONGO_URI=your_mongo_uri
+```
+
+6. Now Run the project
    ```sh
    node  ./dist/server.js
    ```
